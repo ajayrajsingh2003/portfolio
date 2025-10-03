@@ -11,6 +11,7 @@ async function loadPortfolioData() {
         renderExperience(experience);
         renderSkills(skills);
         renderModals(projects);
+        renderTags(); 
     } catch (error) {
         console.error('Error loading portfolio data:', error);
     }
@@ -92,6 +93,123 @@ function renderSkills(skillCategories) {
         
         container.appendChild(skillCard);
     });
+}
+
+// ================= TAGS SECTION =================
+
+function renderTags() {
+    console.log("renderTags initialized");
+    const container = document.getElementById('tags-feed');
+    if (!container) return;
+
+    // Reset container
+    container.innerHTML = `
+        <div class="insta-carousel">
+            <div class="insta-track"></div>
+            <button class="insta-nav insta-prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="insta-nav insta-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="insta-dots"></div>
+    `;
+
+    const track = container.querySelector(".insta-track");
+    const dotsContainer = container.querySelector(".insta-dots");
+
+    // Dummy posts
+    const dummyPosts = [
+        {
+            profile: "assets/images/ajay.png",
+            username: "ajay",
+            tag: "Sponsored",
+            title: "AI Route Optimizer",
+            description: "Finds the healthiest travel routes with AQI and traffic data.",
+            image: "assets/images/placeholder.png",
+            hashtags: ["AI", "Routing", "Azure"],
+            cta: "#"
+        },
+        {
+            profile: "assets/images/ajay.png",
+            username: "ajay",
+            tag: "Featured",
+            title: "Healthcare Data Pipeline",
+            description: "ETL pipeline for healthcare claims and patient analytics.",
+            image: "assets/images/placeholder.png",
+            hashtags: ["ETL", "Healthcare", "AWS"],
+            cta: "#"
+        },
+        {
+            profile: "assets/images/ajay.png",
+            username: "ajay",
+            tag: "Sponsored",
+            title: "Sports Analytics Dashboard",
+            description: "Interactive dashboards with advanced player insights.",
+            image: "assets/images/placeholder.png",
+            hashtags: ["Python", "Dashboards", "SQL"],
+            cta: "#"
+        }
+    ];
+
+    // Render each card
+    dummyPosts.forEach((post, index) => {
+        const card = document.createElement("div");
+        card.className = "insta-card";
+
+        card.innerHTML = `
+            <div class="insta-header">
+                <img src="${post.profile}" alt="${post.username}" class="insta-profile">
+                <div class="insta-info">
+                    <span class="insta-username">${post.username}</span>
+                    <span class="insta-tag">${post.tag}</span>
+                </div>
+                <i class="fas fa-ellipsis-h insta-menu"></i>
+            </div>
+            <div class="insta-image">
+                <img src="${post.image}" alt="${post.title}">
+            </div>
+            <div class="insta-body">
+                <h3 class="insta-title">${post.title}</h3>
+                <p class="insta-description">${post.description}</p>
+                <div class="insta-hashtags">
+                    ${post.hashtags.map(tag => `<span>#${tag}</span>`).join(" ")}
+                </div>
+                <a href="${post.cta}" class="insta-cta" target="_blank">Learn More →</a>
+            </div>
+        `;
+
+        track.appendChild(card);
+
+        // Add dots
+        const dot = document.createElement("span");
+        dot.className = "insta-dot" + (index === 0 ? " active" : "");
+        dotsContainer.appendChild(dot);
+    });
+
+    // Carousel logic
+    let currentIndex = 0;
+    const cards = track.querySelectorAll(".insta-card");
+    const dots = dotsContainer.querySelectorAll(".insta-dot");
+
+    function updateCarousel() {
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach((dot, idx) => dot.classList.toggle("active", idx === currentIndex));
+    }
+
+    container.querySelector(".insta-next").onclick = () => {
+        currentIndex = (currentIndex + 1) % cards.length;
+        updateCarousel();
+    };
+    container.querySelector(".insta-prev").onclick = () => {
+        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+        updateCarousel();
+    };
+    dots.forEach((dot, idx) => {
+        dot.onclick = () => {
+            currentIndex = idx;
+            updateCarousel();
+        };
+    });
+
+    updateCarousel();
 }
 
 // Render all modals
@@ -193,26 +311,49 @@ function renderModals(projects) {
     `;
     
     // Awards Modal
-    container.innerHTML += `
-        <div id="awardsModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close-modal" onclick="closeModal('awardsModal')">&times;</button>
-                    <h2>Honors & Awards</h2>
+    // Awards Modal with Cards
+container.innerHTML += `
+    <div id="awardsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-modal" onclick="closeModal('awardsModal')">&times;</button>
+                <h2>Honors & Awards</h2>
+            </div>
+            <div class="modal-body awards-grid">
+                <div class="award-card">
+                    <img src="assets/images/award-ambassador.png" alt="Ambassador Award">
+                    <h4><a href="https://www.saintpeters.edu/" target="_blank">Ambassador of Saint Peter's University</a></h4>
+                    <p>Jul 2025</p>
                 </div>
-                <div class="modal-body">
-                    <ul>
-                        <li><strong>Ambassador of Saint Peter's University</strong> - Jul 2025</li>
-                        <li><strong>Data Science Club President</strong> - Apr 2025</li>
-                        <li><strong>First Place - Data Science Showcase</strong> - Dec 2024</li>
-                        <li><strong>Alpha Sigma Nu Honor Society</strong> - Nov 2024</li>
-                        <li><strong>Data Storyteller Award</strong> - 2024</li>
-                        <li><strong>NJBDA Research Presenter</strong> - 2025</li>
-                    </ul>
+                <div class="award-card">
+                    <img src="assets/images/award-dsc.png" alt="Data Science Club">
+                    <h4><a href="https://www.saintpeters.edu/" target="_blank">Data Science Club President</a></h4>
+                    <p>Apr 2025</p>
+                </div>
+                <div class="award-card">
+                    <img src="assets/images/award-showcase.png" alt="Data Science Showcase">
+                    <h4><a href="https://njbda.org/" target="_blank">First Place - Data Science Showcase</a></h4>
+                    <p>Dec 2024</p>
+                </div>
+                <div class="award-card">
+                    <img src="assets/images/award-alpha.png" alt="Alpha Sigma Nu">
+                    <h4><a href="https://www.alphasigmanu.org/" target="_blank">Alpha Sigma Nu Honor Society</a></h4>
+                    <p>Nov 2024</p>
+                </div>
+                <div class="award-card">
+                    <img src="assets/images/award-ds.png" alt="Data Storyteller">
+                    <h4><a href="https://www.tableau.com/" target="_blank">Data Storyteller Award</a></h4>
+                    <p>2024</p>
+                </div>
+                <div class="award-card">
+                    <img src="assets/images/award-njbda.png" alt="NJBDA">
+                    <h4><a href="https://njbda.org/" target="_blank">NJBDA Research Presenter</a></h4>
+                    <p>2025</p>
                 </div>
             </div>
         </div>
-    `;
+    </div>
+`;
     
     // Project Modals
     projects.forEach(project => {
@@ -243,6 +384,8 @@ function showTab(tabName) {
     document.getElementById('projects-content').style.display = 'none';
     document.getElementById('experience-content').style.display = 'none';
     document.getElementById('about-content').style.display = 'none';
+    document.getElementById('tags-content').style.display = 'none';  // 🔥 add this line
+
     
     // Remove active class from all tabs
     document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
@@ -250,13 +393,16 @@ function showTab(tabName) {
     // Show selected content and activate tab
     if (tabName === 'projects') {
         document.getElementById('projects-content').style.display = 'block';
-        document.querySelectorAll('.tab')[0].classList.add('active');
+        document.querySelectorAll('.tab')[2].classList.add('active');
     } else if (tabName === 'experience') {
         document.getElementById('experience-content').style.display = 'block';
         document.querySelectorAll('.tab')[1].classList.add('active');
     } else if (tabName === 'about') {
         document.getElementById('about-content').style.display = 'block';
-        document.querySelectorAll('.tab')[2].classList.add('active');
+        document.querySelectorAll('.tab')[0].classList.add('active');
+    } else if (tabName === 'tags') {
+        document.getElementById('tags-content').style.display = 'block';
+        document.querySelectorAll('.tab')[3].classList.add('active');
     }
 }
 
