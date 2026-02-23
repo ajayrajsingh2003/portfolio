@@ -116,38 +116,78 @@ function renderTags() {
     const dotsContainer = container.querySelector(".insta-dots");
 
     // Dummy posts
-    const dummyPosts = [
-        {
-            profile: "assets/images/ajay.png",
-            username: "ajay",
-            tag: "Sponsored",
-            title: "AI Route Optimizer",
-            description: "Finds the healthiest travel routes with AQI and traffic data.",
-            image: "assets/images/placeholder.png",
-            hashtags: ["AI", "Routing", "Azure"],
-            cta: "#"
-        },
-        {
-            profile: "assets/images/ajay.png",
-            username: "ajay",
-            tag: "Featured",
-            title: "Healthcare Data Pipeline",
-            description: "ETL pipeline for healthcare claims and patient analytics.",
-            image: "assets/images/placeholder.png",
-            hashtags: ["ETL", "Healthcare", "AWS"],
-            cta: "#"
-        },
-        {
-            profile: "assets/images/ajay.png",
-            username: "ajay",
-            tag: "Sponsored",
-            title: "Sports Analytics Dashboard",
-            description: "Interactive dashboards with advanced player insights.",
-            image: "assets/images/placeholder.png",
-            hashtags: ["Python", "Dashboards", "SQL"],
-            cta: "#"
-        }
-    ];
+const posts = [
+    {
+        profile: "assets/images/ajay.png",
+        username: "Ajay Raj Singh",
+        tag: "Saint Peter's University",
+        title: "SPU Ambassador",
+        description: "Honored to be announced as an official Ambassador for Saint Peter's University, representing the university's mission in research, leadership, and data science.",
+        image: "assets/images/ambassador_announcement.png",
+        hashtags: ["Ambassador", "Leadership", "DataScience", "SPU"],
+        cta: "https://www.linkedin.com/feed/update/urn:li:activity:7337945622408290307/"
+    },
+    {
+        profile: "assets/images/ajay.png",
+        username: "Ajay Raj Singh",
+        tag: "Data Storyteller Award 2024",
+        title: "Live Healthcare Data Pipeline Analytics",
+        description: "Won the Data Storyteller Award for building a real-time healthcare data pipeline on AWS. Currently presented on Tableau",
+        image: "assets/images/placeholder.png",
+        hashtags: ["AWS", "DataEngineering", "ETL", "Healthcare", "Tableau"],
+        cta: "https://www.linkedin.com/feed/update/urn:li:activity:7246560421753536515/"
+    },
+    {
+        profile: "assets/images/ajay.png",
+        username: "Ajay Raj Singh",
+        tag: "Data Science Showcase 2024 — 1st Prize",
+        title: "Safest Routes for Sensitive Populations (AQI Routing)",
+        description: "Won 1st Prize at SPU's Data Science Showcase for engineering a least-polluted routing algorithm using Azure Maps API and live Air Quality Index data, validated across the world's most polluted cities.",
+        image: "assets/images/placeholder.png",
+        hashtags: ["Python", "AzureMaps", "AQI", "GeoSpatial", "PublicHealth"],
+        cta: "https://www.linkedin.com/feed/update/urn:li:activity:7270277314288967680/"
+    },
+    {
+        profile: "assets/images/ajay.png",
+        username: "Ajay Raj Singh",
+        tag: "NJBDA 2025 Conference",
+        title: "Presented 2 Research Papers at NJBDA 2025",
+        description: "Led two teams to present research at the NJ Big Data Alliance 2025 Conference, covering real-time NLP news retrieval pipelines and cloud-native AQI routing systems. Both papers are currently under review.",
+        image: "assets/images/placeholder.png",
+        hashtags: ["NLP", "DataEngineering", "Research", "BigData", "NJBDA"],
+        cta: "https://www.linkedin.com/feed/update/urn:li:activity:7330083180433002496/"
+    },
+    {
+        profile: "assets/images/ajay.png",
+        username: "Ajay Raj Singh",
+        tag: "Founder & President",
+        title: "President of Data Science Club at SPU",
+        description: "Founded and led SPU's 50+ member Data Science Club, organizing research events, workshops, and collaborative projects that connected students with faculty and real-world data challenges.",
+        image: "assets/images/placeholder.png",
+        hashtags: ["Leadership", "DataScience", "ClubPresident", "CommunityBuilding"],
+        cta: "https://www.linkedin.com/in/connectwithajayrajsingh/details/honors/725167849/multiple-media-viewer/?profileId=ACoAAB-XSW0Bns3c7TYwxTOwLSsYF9R8HDTlIUA&treasuryMediaId=1760643167209"
+    },
+    {
+        profile: "assets/images/ajay.png",
+        username: "Ajay Raj Singh",
+        tag: "SPU Symposium 2024 & 2025",
+        title: "Research Presented at SPU Symposiums",
+        description: "Presented two research projects at Saint Peter's University Symposiums, a hybrid Ant Colony Optimization + Grid Search framework improving breast cancer diagnostic accuracy by 15%, and an NLP pipeline processing 10K+ daily news articles.",
+        image: "assets/images/placeholder.png",
+        hashtags: ["NLP", "MetaheuristicAlgorithms", "MachineLearning", "Research", "Python"],
+        cta: "https://www.linkedin.com/in/connectwithajayrajsingh/details/honors/1551450604/multiple-media-viewer/?profileId=ACoAAB-XSW0Bns3c7TYwxTOwLSsYF9R8HDTlIUA&treasuryMediaId=1766783009453"
+    },
+    {
+        profile: "assets/images/ajay.png",
+        username: "Ajay Raj Singh",
+        tag: "Top 1% of Class — Commencement 2025",
+        title: "Inducted into Alpha Sigma Nu Honor Society",
+        description: "Selected for Alpha Sigma Nu, the National Jesuit Honor Society, for placing in the top 1% of the class — recognizing excellence in academics (GPA 3.95/4.0), leadership, and service.",
+        image: "assets/images/placeholder.png",
+        hashtags: ["HonorSociety", "AlphaSigmaNu", "AcademicExcellence", "Leadership"],
+        cta: "https://www.linkedin.com/in/connectwithajayrajsingh/details/honors/1079808237/multiple-media-viewer/?profileId=ACoAAB-XSW0Bns3c7TYwxTOwLSsYF9R8HDTlIUA&treasuryMediaId=1757365333033"
+    }
+];
 
     // Render each card
     dummyPosts.forEach((post, index) => {
