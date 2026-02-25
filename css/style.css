@@ -668,10 +668,15 @@ body {
 
 /* ====== TAGS / INSTAGRAM STYLE ====== */
 
+.tags-feed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .insta-carousel {
     position: relative;
-    overflow-x: hidden;
-    overflow-y: visible;
+    overflow: hidden;          /* back to hidden — JS now handles width correctly */
     width: 100%;
     max-width: 420px;
     margin: 0 auto;
@@ -684,7 +689,7 @@ body {
     display: flex;
     transition: transform 0.4s ease-in-out;
     width: 100%;
-    align-items: stretch;
+    align-items: flex-start;
 }
 
 .insta-card {
@@ -694,7 +699,6 @@ body {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding-bottom: 16px;
 }
 
 .insta-header {
@@ -755,10 +759,9 @@ body {
 }
 
 .insta-body {
-    padding: 12px;
+    padding: 12px 12px 16px 12px;
     display: flex;
     flex-direction: column;
-    flex: 1;
 }
 
 .insta-title {
@@ -796,7 +799,6 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-top: auto;
     padding: 8px 14px;
     background: #0077b5;
     color: #fff;
@@ -806,6 +808,7 @@ body {
     text-decoration: none;
     width: fit-content;
     transition: background 0.3s ease;
+    margin-top: 4px;
 }
 
 .insta-cta:hover {
@@ -814,7 +817,7 @@ body {
 
 .insta-nav {
     position: absolute;
-    top: 40%;
+    top: 38%;
     transform: translateY(-50%);
     background: rgba(255,255,255,0.9);
     border: none;
@@ -831,6 +834,8 @@ body {
 .insta-dots {
     text-align: center;
     padding: 10px 0;
+    width: 100%;
+    max-width: 420px;
 }
 
 .insta-dot {
@@ -893,6 +898,10 @@ body {
     .insta-carousel {
         max-width: 100%;
         border-radius: 8px;
+    }
+
+    .insta-dots {
+        max-width: 100%;
     }
 
     .insta-image img {

@@ -100,7 +100,6 @@ function renderSkills(skillCategories) {
 // ================= TAGS SECTION =================
 
 function renderTags() {
-    console.log("renderTags initialized");
     const container = document.getElementById('tags-feed');
     if (!container) return;
 
@@ -113,6 +112,7 @@ function renderTags() {
         <div class="insta-dots"></div>
     `;
 
+    const carousel = container.querySelector(".insta-carousel");
     const track = container.querySelector(".insta-track");
     const dotsContainer = container.querySelector(".insta-dots");
 
@@ -136,7 +136,7 @@ function renderTags() {
             image: "assets/images/Data StoryTeller Award.png",
             hashtags: ["AWS", "DataEngineering", "ETL", "Healthcare", "Tableau"],
             cta: "https://www.linkedin.com/feed/update/urn:li:activity:7246560421753536515/"
-        },  
+        },
         {
             profile: "assets/images/ajay.png",
             username: "Ajay Raj Singh",
@@ -229,7 +229,9 @@ function renderTags() {
     const dots = dotsContainer.querySelectorAll(".insta-dot");
 
     function updateCarousel() {
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        // Use carousel's actual pixel width for reliable translation
+        const cardWidth = carousel.offsetWidth;
+        track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
         dots.forEach((dot, idx) => dot.classList.toggle("active", idx === currentIndex));
     }
 
@@ -267,19 +269,19 @@ function renderModals(projects) {
                 <div class="modal-body">
                     <div style="display:flex;flex-direction:column;gap:10px;">
                         <div style="display:flex;align-items:center;gap:10px;">
-                            <i class="fas fa-user" style="width:18px;color:var(--accent,#4f8ef7);"></i>
+                            <i class="fas fa-user" style="width:18px;color:#667eea;"></i>
                             <span><strong>Ajay Raj Singh</strong></span>
                         </div>
                         <div style="display:flex;align-items:center;gap:10px;">
-                            <i class="fas fa-envelope" style="width:18px;color:var(--accent,#4f8ef7);"></i>
+                            <i class="fas fa-envelope" style="width:18px;color:#667eea;"></i>
                             <a href="mailto:ajayrajsingh2003@gmail.com">ajayrajsingh2003@gmail.com</a>
                         </div>
                         <div style="display:flex;align-items:center;gap:10px;">
-                            <i class="fas fa-phone" style="width:18px;color:var(--accent,#4f8ef7);"></i>
+                            <i class="fas fa-phone" style="width:18px;color:#667eea;"></i>
                             <span>+1 (732) 209-0281</span>
                         </div>
                         <div style="display:flex;align-items:center;gap:10px;">
-                            <i class="fas fa-map-marker-alt" style="width:18px;color:var(--accent,#4f8ef7);"></i>
+                            <i class="fas fa-map-marker-alt" style="width:18px;color:#667eea;"></i>
                             <span>Jersey City, New Jersey, United States</span>
                         </div>
                         <div style="display:flex;align-items:center;gap:10px;">
@@ -287,7 +289,7 @@ function renderModals(projects) {
                             <a href="https://linkedin.com/in/connectwithajayrajsingh" target="_blank">connectwithajayrajsingh</a>
                         </div>
                         <div style="display:flex;align-items:center;gap:10px;">
-                            <i class="fab fa-github" style="width:18px;color:var(--accent,#4f8ef7);"></i>
+                            <i class="fab fa-github" style="width:18px;color:#667eea;"></i>
                             <a href="https://github.com/ajayrajsingh2003" target="_blank">ajayrajsingh2003</a>
                         </div>
                     </div>
@@ -308,7 +310,7 @@ function renderModals(projects) {
                 </div>
                 <div class="modal-body">
 
-                    <div style="border-left:3px solid var(--accent,#4f8ef7);padding-left:14px;margin-bottom:24px;">
+                    <div style="border-left:3px solid #667eea;padding-left:14px;margin-bottom:24px;">
                         <h3 style="margin:0 0 2px;">Data Engineer</h3>
                         <div style="font-weight:600;margin-bottom:2px;">Pavane Solutions Inc.</div>
                         <div style="font-size:0.85rem;opacity:0.7;margin-bottom:10px;">Jul 2024 – Present &nbsp;·&nbsp; Remote, NJ</div>
@@ -326,7 +328,7 @@ function renderModals(projects) {
                         </ul>
                     </div>
 
-                    <div style="border-left:3px solid var(--accent,#4f8ef7);padding-left:14px;margin-bottom:24px;">
+                    <div style="border-left:3px solid #667eea;padding-left:14px;margin-bottom:24px;">
                         <h3 style="margin:0 0 2px;">Data Science Researcher</h3>
                         <div style="font-weight:600;margin-bottom:2px;">Saint Peter's University</div>
                         <div style="font-size:0.85rem;opacity:0.7;margin-bottom:10px;">Nov 2023 – Feb 2025 &nbsp;·&nbsp; Jersey City, NJ</div>
@@ -342,7 +344,7 @@ function renderModals(projects) {
                         </ul>
                     </div>
 
-                    <div style="border-left:3px solid var(--accent,#4f8ef7);padding-left:14px;margin-bottom:24px;">
+                    <div style="border-left:3px solid #667eea;padding-left:14px;margin-bottom:24px;">
                         <h3 style="margin:0 0 2px;">Data Scientist II</h3>
                         <div style="font-weight:600;margin-bottom:2px;">IT Nopal Technologies</div>
                         <div style="font-size:0.85rem;opacity:0.7;margin-bottom:10px;">Jun 2021 – Jan 2023 &nbsp;·&nbsp; New Delhi, India</div>
@@ -356,7 +358,7 @@ function renderModals(projects) {
                         </ul>
                     </div>
 
-                    <div style="border-left:3px solid var(--accent,#4f8ef7);padding-left:14px;">
+                    <div style="border-left:3px solid #667eea;padding-left:14px;">
                         <h3 style="margin:0 0 2px;">Data Scientist I</h3>
                         <div style="font-weight:600;margin-bottom:2px;">IT Nopal Technologies</div>
                         <div style="font-size:0.85rem;opacity:0.7;margin-bottom:10px;">Jan 2019 – May 2021 &nbsp;·&nbsp; New Delhi, India</div>
@@ -384,79 +386,38 @@ function renderModals(projects) {
                     <h2>Technical Skills</h2>
                 </div>
                 <div class="modal-body">
-
                     <div style="margin-bottom:18px;">
-                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
-                            <i class="fas fa-code" style="color:var(--accent,#4f8ef7);"></i> Programming
-                        </div>
-                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                            ${["Python","SQL","PL/SQL","C/C++","YAML","Bash","JSON"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
-                        </div>
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><i class="fas fa-code" style="color:#667eea;"></i> Programming</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">${["Python","SQL","PL/SQL","C/C++","YAML","Bash","JSON"].map(s=>`<span style="background:#e8f0fe;color:#667eea;border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}</div>
                     </div>
-
                     <div style="margin-bottom:18px;">
-                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
-                            <i class="fas fa-stream" style="color:var(--accent,#4f8ef7);"></i> Data Engineering & ETL
-                        </div>
-                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                            ${["PySpark","Apache Spark","Apache Airflow","dbt","ETL/ELT","Data Warehousing","Star Schema Modeling","Data Partitioning","Query Optimization","S3 Event-Driven Pipelines","ELT Development"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
-                        </div>
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><i class="fas fa-stream" style="color:#667eea;"></i> Data Engineering & ETL</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">${["PySpark","Apache Spark","Apache Airflow","dbt","ETL/ELT","Data Warehousing","Star Schema Modeling","Data Partitioning","Query Optimization","S3 Event-Driven Pipelines","ELT Development"].map(s=>`<span style="background:#e8f0fe;color:#667eea;border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}</div>
                     </div>
-
                     <div style="margin-bottom:18px;">
-                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
-                            <i class="fas fa-cloud" style="color:var(--accent,#4f8ef7);"></i> Cloud & Infrastructure
-                        </div>
-                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                            ${["AWS S3","AWS EMR","AWS Glue","AWS Lambda","AWS Athena","AWS EKS","CloudWatch","CloudFront","API Gateway","Azure Data Factory","Azure Databricks","Azure Maps API","Docker","Kubernetes","Terraform"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
-                        </div>
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><i class="fas fa-cloud" style="color:#667eea;"></i> Cloud & Infrastructure</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">${["AWS S3","AWS EMR","AWS Glue","AWS Lambda","AWS Athena","AWS EKS","CloudWatch","CloudFront","API Gateway","Azure Data Factory","Azure Databricks","Azure Maps API","Docker","Kubernetes","Terraform"].map(s=>`<span style="background:#e8f0fe;color:#667eea;border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}</div>
                     </div>
-
                     <div style="margin-bottom:18px;">
-                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
-                            <i class="fas fa-database" style="color:var(--accent,#4f8ef7);"></i> Databases
-                        </div>
-                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                            ${["PostgreSQL","MySQL","SQL Server","MongoDB","Snowflake","Redshift","AWS RDS","Delta Lake"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
-                        </div>
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><i class="fas fa-database" style="color:#667eea;"></i> Databases</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">${["PostgreSQL","MySQL","SQL Server","MongoDB","Snowflake","Redshift","AWS RDS","Delta Lake"].map(s=>`<span style="background:#e8f0fe;color:#667eea;border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}</div>
                     </div>
-
                     <div style="margin-bottom:18px;">
-                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
-                            <i class="fas fa-chart-bar" style="color:var(--accent,#4f8ef7);"></i> Analytics & Visualization
-                        </div>
-                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                            ${["Tableau","Power BI","Plotly","Pandas","NumPy","Scikit-learn","PyTorch","Matplotlib","Seaborn","Feature Engineering"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
-                        </div>
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><i class="fas fa-chart-bar" style="color:#667eea;"></i> Analytics & Visualization</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">${["Tableau","Power BI","Plotly","Pandas","NumPy","Scikit-learn","PyTorch","Matplotlib","Seaborn","Feature Engineering"].map(s=>`<span style="background:#e8f0fe;color:#667eea;border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}</div>
                     </div>
-
                     <div style="margin-bottom:18px;">
-                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
-                            <i class="fas fa-brain" style="color:var(--accent,#4f8ef7);"></i> NLP & Machine Learning
-                        </div>
-                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                            ${["NLP","Sentiment Analysis","Text Processing","Hugging Face Transformers","BERT","Machine Learning","Classification","Metaheuristic Algorithms","Flask APIs"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
-                        </div>
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><i class="fas fa-brain" style="color:#667eea;"></i> NLP & Machine Learning</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">${["NLP","Sentiment Analysis","Text Processing","Hugging Face Transformers","BERT","Machine Learning","Classification","Metaheuristic Algorithms","Flask APIs"].map(s=>`<span style="background:#e8f0fe;color:#667eea;border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}</div>
                     </div>
-
                     <div style="margin-bottom:18px;">
-                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
-                            <i class="fas fa-tools" style="color:var(--accent,#4f8ef7);"></i> DevOps & CI/CD
-                        </div>
-                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                            ${["Docker","Kubernetes","Jenkins","GitLab CI/CD","Git","Terraform","Infrastructure as Code","REST API Integration"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
-                        </div>
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><i class="fas fa-tools" style="color:#667eea;"></i> DevOps & CI/CD</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">${["Docker","Kubernetes","Jenkins","GitLab CI/CD","Git","Terraform","Infrastructure as Code","REST API Integration"].map(s=>`<span style="background:#e8f0fe;color:#667eea;border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}</div>
                     </div>
-
                     <div>
-                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
-                            <i class="fas fa-shield-alt" style="color:var(--accent,#4f8ef7);"></i> Data Quality & Monitoring
-                        </div>
-                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                            ${["AWS CloudWatch","Schema Drift Detection","Data Validation","Automated Alerting","SLA Monitoring","Referential Integrity Checks","PyODBC"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
-                        </div>
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><i class="fas fa-shield-alt" style="color:#667eea;"></i> Data Quality & Monitoring</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">${["AWS CloudWatch","Schema Drift Detection","Data Validation","Automated Alerting","SLA Monitoring","Referential Integrity Checks","PyODBC"].map(s=>`<span style="background:#e8f0fe;color:#667eea;border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}</div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -471,8 +432,7 @@ function renderModals(projects) {
                     <h2>Education</h2>
                 </div>
                 <div class="modal-body">
-
-                    <div style="border-left:3px solid var(--accent,#4f8ef7);padding-left:14px;margin-bottom:24px;">
+                    <div style="border-left:3px solid #667eea;padding-left:14px;margin-bottom:24px;">
                         <h3 style="margin:0 0 2px;">Master of Science in Data Science</h3>
                         <div style="font-weight:600;margin-bottom:2px;">Saint Peter's University</div>
                         <div style="font-size:0.85rem;opacity:0.7;margin-bottom:10px;">Feb 2023 – Feb 2025 &nbsp;·&nbsp; Jersey City, NJ</div>
@@ -480,14 +440,12 @@ function renderModals(projects) {
                         <p style="margin:0 0 6px;"><strong>Honors:</strong> Alpha Sigma Nu Honor Society &nbsp;·&nbsp; Top 1% of class</p>
                         <p style="margin:0;"><strong>Activities:</strong> Data Science Club Founder & President &nbsp;·&nbsp; SPU Ambassador &nbsp;·&nbsp; NJBDA 2025 Presenter</p>
                     </div>
-
-                    <div style="border-left:3px solid var(--accent,#4f8ef7);padding-left:14px;">
+                    <div style="border-left:3px solid #667eea;padding-left:14px;">
                         <h3 style="margin:0 0 2px;">Bachelor of Technology in Computer Science</h3>
                         <div style="font-weight:600;margin-bottom:2px;">AKTU</div>
                         <div style="font-size:0.85rem;opacity:0.7;margin-bottom:10px;">Aug 2016 – Aug 2020 &nbsp;·&nbsp; India</div>
                         <p style="margin:0;"><strong>GPA:</strong> 3.57 / 4.00</p>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -502,43 +460,36 @@ function renderModals(projects) {
                     <h2>Honors & Awards</h2>
                 </div>
                 <div class="modal-body awards-grid">
-
                     <a href="https://www.linkedin.com/feed/update/urn:li:activity:7337945622408290307/" target="_blank" class="award-card" style="text-decoration:none;display:block;cursor:pointer;">
                         <img src="assets/images/ambassador_announcement.png" alt="SPU Ambassador">
                         <h4>Ambassador of Saint Peter's University</h4>
-                        <p>Jul 2025 &nbsp;·&nbsp; <span style="color:var(--accent,#4f8ef7);">LinkedIn →</span></p>
+                        <p>Jul 2025 &nbsp;·&nbsp; <span style="color:#667eea;">LinkedIn →</span></p>
                     </a>
-
                     <a href="https://www.linkedin.com/feed/update/urn:li:activity:7318006071007088640/" target="_blank" class="award-card" style="text-decoration:none;display:block;cursor:pointer;">
                         <img src="assets/images/Data Science Club President.png" alt="Data Science Club">
                         <h4>Data Science Club Founder & President</h4>
-                        <p>Apr 2025 &nbsp;·&nbsp; <span style="color:var(--accent,#4f8ef7);">LinkedIn →</span></p>
+                        <p>Apr 2025 &nbsp;·&nbsp; <span style="color:#667eea;">LinkedIn →</span></p>
                     </a>
-
                     <a href="https://www.linkedin.com/feed/update/urn:li:activity:7270277314288967680/" target="_blank" class="award-card" style="text-decoration:none;display:block;cursor:pointer;">
                         <img src="assets/images/Data Science Showcase Winner.png" alt="Data Science Showcase">
                         <h4>1st Place — Data Science Showcase</h4>
-                        <p>Dec 2024 &nbsp;·&nbsp; <span style="color:var(--accent,#4f8ef7);">LinkedIn →</span></p>
+                        <p>Dec 2024 &nbsp;·&nbsp; <span style="color:#667eea;">LinkedIn →</span></p>
                     </a>
-
                     <a href="https://www.linkedin.com/in/connectwithajayrajsingh/details/honors/" target="_blank" class="award-card" style="text-decoration:none;display:block;cursor:pointer;">
                         <img src="assets/images/alpha sigma nu.png" alt="Alpha Sigma Nu">
                         <h4>Alpha Sigma Nu Honor Society</h4>
-                        <p>Nov 2024 &nbsp;·&nbsp; <span style="color:var(--accent,#4f8ef7);">LinkedIn →</span></p>
+                        <p>Nov 2024 &nbsp;·&nbsp; <span style="color:#667eea;">LinkedIn →</span></p>
                     </a>
-
                     <a href="https://www.linkedin.com/feed/update/urn:li:activity:7246560421753536515/" target="_blank" class="award-card" style="text-decoration:none;display:block;cursor:pointer;">
                         <img src="assets/images/Data StoryTeller Award.png" alt="Data Storyteller">
                         <h4>Data Storyteller Award</h4>
-                        <p>2024 &nbsp;·&nbsp; <span style="color:var(--accent,#4f8ef7);">LinkedIn →</span></p>
+                        <p>2024 &nbsp;·&nbsp; <span style="color:#667eea;">LinkedIn →</span></p>
                     </a>
-
                     <a href="https://www.linkedin.com/feed/update/urn:li:activity:7330083180433002496/" target="_blank" class="award-card" style="text-decoration:none;display:block;cursor:pointer;">
                         <img src="assets/images/NJBDA conference.png" alt="NJBDA">
                         <h4>NJBDA 2025 Research Presenter</h4>
-                        <p>2025 &nbsp;·&nbsp; <span style="color:var(--accent,#4f8ef7);">LinkedIn →</span></p>
+                        <p>2025 &nbsp;·&nbsp; <span style="color:#667eea;">LinkedIn →</span></p>
                     </a>
-
                 </div>
             </div>
         </div>
@@ -570,11 +521,13 @@ function renderModals(projects) {
 // ================= TABS =================
 
 function showTab(tabName) {
+    // Hide all tabs
     document.getElementById('projects-content').style.display = 'none';
     document.getElementById('experience-content').style.display = 'none';
     document.getElementById('about-content').style.display = 'none';
     document.getElementById('tags-content').style.display = 'none';
 
+    // Remove active from all tabs
     document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
 
     if (tabName === 'projects') {
@@ -589,6 +542,21 @@ function showTab(tabName) {
     } else if (tabName === 'tags') {
         document.getElementById('tags-content').style.display = 'block';
         document.querySelectorAll('.tab')[3].classList.add('active');
+
+        // *** KEY FIX: recalculate carousel width after becoming visible ***
+        setTimeout(() => {
+            const carousel = document.querySelector('.insta-carousel');
+            const track = document.querySelector('.insta-track');
+            const cards = track ? track.querySelectorAll('.insta-card') : [];
+            if (carousel && track && cards.length) {
+                const cardWidth = carousel.offsetWidth;
+                // Find current active dot to know current index
+                const dots = document.querySelectorAll('.insta-dot');
+                let currentIndex = 0;
+                dots.forEach((dot, idx) => { if (dot.classList.contains('active')) currentIndex = idx; });
+                track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            }
+        }, 50);
     }
 }
 
