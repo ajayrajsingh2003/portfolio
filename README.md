@@ -7,7 +7,7 @@ Professional portfolio website showcasing my experience as a Data Engineer with 
 
 ## 🚀 Live Demo
 
-**Visit:** [https://ajayrajsingh2003.github.io/ajay-portfolio/](https://ajayrajsingh2003.github.io/ajay-portfolio/)
+**Visit:** [Portfolio](https://ajayrajsingh2003.github.io/portfolio/)
 
 ## 📋 Table of Contents
 
