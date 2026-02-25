@@ -3,7 +3,7 @@
         "company": "Pavane Solutions Inc.",
         "logo": "PS",
         "position": "Data Engineer",
-        "duration": "Jun 2024 – Present",
+        "duration": "Jul 2024 – Present",
         "location": "Remote, NJ",
         "achievements": [
             "Designed and implemented scalable batch and real-time ETL pipelines using PySpark and Apache Airflow, improving data processing throughput by 35%",
@@ -13,7 +13,9 @@
             "Collaborated with cross-functional engineering and analytics teams to design data schemas and optimize query performance, reducing average query latency by 20%",
             "Implemented infrastructure as code (IaC) using Terraform to automate provisioning of cloud resources, improving deployment speed and environment consistency",
             "Built reusable data ingestion frameworks enabling rapid onboarding of new data sources, cutting integration time by 50%",
-            "Led initiatives to optimize data lake architecture with partitioning and compaction strategies, enhancing query efficiency for big data analytics"
+            "Led initiatives to optimize data lake architecture with partitioning and compaction strategies, enhancing query efficiency for big data analytics",
+            "Leveraged Azure Databricks to run large-scale PySpark transformations on Delta Lake, improving pipeline reliability and enabling schema enforcement across ingestion layers",
+            "Used Databricks notebooks for collaborative data exploration and model prototyping, accelerating handoff between engineering and analytics teams"
         ]
     },
     {
@@ -30,7 +32,8 @@
             "Engineered hybrid ACO + Grid Search algorithm for logistic regression, improving prediction accuracy by 15% and reducing model training time by 20%",
             "Developed NLP-driven news summarization tool integrating live APIs and dynamic word clouds to improve accessibility for underserved users",
             "Presented two applied research projects at NJBDA 2025, strengthening institutional reputation and visibility in health-tech and NLP research",
-            "Leveraged Azure Maps API to compute least-polluted travel routes in real time, integrating geospatial and AQI data for health-focused routing models"
+            "Leveraged Azure Maps API to compute least-polluted travel routes in real time, integrating geospatial and AQI data for health-focused routing models",
+            "Utilized Azure Databricks for distributed data processing and exploratory analysis across large geospatial and health datasets, streamlining research workflows"
         ]
     },
     {

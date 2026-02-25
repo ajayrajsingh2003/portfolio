@@ -37,12 +37,14 @@ function renderProjects(projects) {
                     ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                 </div>
                 <div class="post-actions">
+                    ${project.github ? `
                     <a href="${project.github}" class="action-btn primary" target="_blank" onclick="event.stopPropagation()">
                         <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="${project.demo || '#'}" class="action-btn secondary" onclick="event.stopPropagation()">
-                        <i class="fas fa-external-link-alt"></i> ${project.demo ? 'Demo' : 'Learn More'}
-                    </a>
+                    </a>` : ''}
+                    ${project.demo ? `
+                    <a href="${project.demo}" class="action-btn secondary" target="_blank" onclick="event.stopPropagation()">
+                        <i class="fas fa-external-link-alt"></i> Demo
+                    </a>` : ''}
                 </div>
             </div>
         `;
@@ -102,7 +104,6 @@ function renderTags() {
     const container = document.getElementById('tags-feed');
     if (!container) return;
 
-    // Reset container
     container.innerHTML = `
         <div class="insta-carousel">
             <div class="insta-track"></div>
@@ -115,81 +116,79 @@ function renderTags() {
     const track = container.querySelector(".insta-track");
     const dotsContainer = container.querySelector(".insta-dots");
 
-    // Dummy posts
-const posts = [
-    {
-        profile: "assets/images/ajay.png",
-        username: "Ajay Raj Singh",
-        tag: "Saint Peter's University",
-        title: "SPU Ambassador",
-        description: "Honored to be announced as an official Ambassador for Saint Peter's University, representing the university's mission in research, leadership, and data science.",
-        image: "assets/images/ambassador_announcement.png",
-        hashtags: ["Ambassador", "Leadership", "DataScience", "SPU"],
-        cta: "https://www.linkedin.com/feed/update/urn:li:activity:7337945622408290307/"
-    },
-    {
-        profile: "assets/images/ajay.png",
-        username: "Ajay Raj Singh",
-        tag: "Data Storyteller Award 2024",
-        title: "Live Healthcare Data Pipeline Analytics",
-        description: "Won the Data Storyteller Award for building a real-time healthcare data pipeline on AWS. Currently presented on Tableau",
-        image: "assets/images/placeholder.png",
-        hashtags: ["AWS", "DataEngineering", "ETL", "Healthcare", "Tableau"],
-        cta: "https://www.linkedin.com/feed/update/urn:li:activity:7246560421753536515/"
-    },
-    {
-        profile: "assets/images/ajay.png",
-        username: "Ajay Raj Singh",
-        tag: "Data Science Showcase 2024 — 1st Prize",
-        title: "Safest Routes for Sensitive Populations (AQI Routing)",
-        description: "Won 1st Prize at SPU's Data Science Showcase for engineering a least-polluted routing algorithm using Azure Maps API and live Air Quality Index data, validated across the world's most polluted cities.",
-        image: "assets/images/placeholder.png",
-        hashtags: ["Python", "AzureMaps", "AQI", "GeoSpatial", "PublicHealth"],
-        cta: "https://www.linkedin.com/feed/update/urn:li:activity:7270277314288967680/"
-    },
-    {
-        profile: "assets/images/ajay.png",
-        username: "Ajay Raj Singh",
-        tag: "NJBDA 2025 Conference",
-        title: "Presented 2 Research Papers at NJBDA 2025",
-        description: "Led two teams to present research at the NJ Big Data Alliance 2025 Conference, covering real-time NLP news retrieval pipelines and cloud-native AQI routing systems. Both papers are currently under review.",
-        image: "assets/images/placeholder.png",
-        hashtags: ["NLP", "DataEngineering", "Research", "BigData", "NJBDA"],
-        cta: "https://www.linkedin.com/feed/update/urn:li:activity:7330083180433002496/"
-    },
-    {
-        profile: "assets/images/ajay.png",
-        username: "Ajay Raj Singh",
-        tag: "Founder & President",
-        title: "President of Data Science Club at SPU",
-        description: "Founded and led SPU's 50+ member Data Science Club, organizing research events, workshops, and collaborative projects that connected students with faculty and real-world data challenges.",
-        image: "assets/images/placeholder.png",
-        hashtags: ["Leadership", "DataScience", "ClubPresident", "CommunityBuilding"],
-        cta: "https://www.linkedin.com/in/connectwithajayrajsingh/details/honors/725167849/multiple-media-viewer/?profileId=ACoAAB-XSW0Bns3c7TYwxTOwLSsYF9R8HDTlIUA&treasuryMediaId=1760643167209"
-    },
-    {
-        profile: "assets/images/ajay.png",
-        username: "Ajay Raj Singh",
-        tag: "SPU Symposium 2024 & 2025",
-        title: "Research Presented at SPU Symposiums",
-        description: "Presented two research projects at Saint Peter's University Symposiums, a hybrid Ant Colony Optimization + Grid Search framework improving breast cancer diagnostic accuracy by 15%, and an NLP pipeline processing 10K+ daily news articles.",
-        image: "assets/images/placeholder.png",
-        hashtags: ["NLP", "MetaheuristicAlgorithms", "MachineLearning", "Research", "Python"],
-        cta: "https://www.linkedin.com/in/connectwithajayrajsingh/details/honors/1551450604/multiple-media-viewer/?profileId=ACoAAB-XSW0Bns3c7TYwxTOwLSsYF9R8HDTlIUA&treasuryMediaId=1766783009453"
-    },
-    {
-        profile: "assets/images/ajay.png",
-        username: "Ajay Raj Singh",
-        tag: "Top 1% of Class — Commencement 2025",
-        title: "Inducted into Alpha Sigma Nu Honor Society",
-        description: "Selected for Alpha Sigma Nu, the National Jesuit Honor Society, for placing in the top 1% of the class — recognizing excellence in academics (GPA 3.95/4.0), leadership, and service.",
-        image: "assets/images/placeholder.png",
-        hashtags: ["HonorSociety", "AlphaSigmaNu", "AcademicExcellence", "Leadership"],
-        cta: "https://www.linkedin.com/in/connectwithajayrajsingh/details/honors/1079808237/multiple-media-viewer/?profileId=ACoAAB-XSW0Bns3c7TYwxTOwLSsYF9R8HDTlIUA&treasuryMediaId=1757365333033"
-    }
-];
+    const dummyPosts = [
+        {
+            profile: "assets/images/ajay.png",
+            username: "Ajay Raj Singh",
+            tag: "Saint Peter's University",
+            title: "SPU Ambassador 🎓",
+            description: "Honored to be announced as an official Ambassador for Saint Peter's University — representing the university's mission in research, leadership, and data science.",
+            image: "assets/images/ambassador_announcement.png",
+            hashtags: ["Ambassador", "Leadership", "DataScience", "SPU"],
+            cta: "https://www.linkedin.com/feed/update/urn:li:activity:7337945622408290307/"
+        },
+        {
+            profile: "assets/images/ajay.png",
+            username: "Ajay Raj Singh",
+            tag: "Data Storyteller Award 2024 🏆",
+            title: "Live Healthcare Data Pipeline",
+            description: "Won the Data Storyteller Award for a real-time healthcare pipeline on AWS — processing 200GB+ daily claims with 99.5% uptime and CloudWatch-powered alerting.",
+            image: "assets/images/Data StoryTeller Award.png",
+            hashtags: ["AWS", "DataEngineering", "ETL", "Healthcare", "Tableau"],
+            cta: "https://www.linkedin.com/feed/update/urn:li:activity:7246560421753536515/"
+        },  
+        {
+            profile: "assets/images/ajay.png",
+            username: "Ajay Raj Singh",
+            tag: "1st Prize · Data Science Showcase 2024 🥇",
+            title: "AQI Routing for Respiratory Patients",
+            description: "Built a least-polluted routing algorithm using Azure Maps and live AQI data — validated across the world's most polluted cities. Won 1st Prize at SPU's Data Science Showcase.",
+            image: "assets/images/Data Science Showcase Winner.png",
+            hashtags: ["AzureMaps", "GeoSpatial", "AQI", "HealthTech", "Python"],
+            cta: "https://www.linkedin.com/feed/update/urn:li:activity:7270277314288967680/"
+        },
+        {
+            profile: "assets/images/ajay.png",
+            username: "Ajay Raj Singh",
+            tag: "NJBDA 2025 Conference 🎤",
+            title: "Presented 2 Research Papers at NJBDA",
+            description: "Led two teams to present research at the NJ Big Data Alliance 2025 — covering real-time NLP news pipelines and cloud-native AQI routing. Both papers under peer review.",
+            image: "assets/images/NJBDA conference.png",
+            hashtags: ["NLP", "BigData", "Research", "DataEngineering", "NJBDA2025"],
+            cta: "https://www.linkedin.com/feed/update/urn:li:activity:7330083180433002496/"
+        },
+        {
+            profile: "assets/images/ajay.png",
+            username: "Ajay Raj Singh",
+            tag: "Founder & President 👨‍💻",
+            title: "Data Science Club at SPU",
+            description: "Founded and led SPU's 50+ member Data Science Club — organizing research events, workshops, and projects that connected students with real-world data challenges.",
+            image: "assets/images/Data Science Club President.png",
+            hashtags: ["Leadership", "DataScience", "ClubFounder", "CommunityBuilding"],
+            cta: "https://www.linkedin.com/feed/update/urn:li:activity:7318006071007088640/"
+        },
+        {
+            profile: "assets/images/ajay.png",
+            username: "Ajay Raj Singh",
+            tag: "SPU Symposium 2024 & 2025 🔬",
+            title: "Research at SPU Symposiums",
+            description: "Presented hybrid metaheuristic optimization for breast cancer diagnostics (+15% accuracy) and an NLP pipeline processing 10K+ daily news articles at SPU Symposiums.",
+            image: "assets/images/Symposiums.png",
+            hashtags: ["NLP", "MetaheuristicAlgorithms", "MachineLearning", "HealthcareAI"],
+            cta: "https://www.linkedin.com/feed/update/urn:li:activity:7323804099462762496/"
+        },
+        {
+            profile: "assets/images/ajay.png",
+            username: "Ajay Raj Singh",
+            tag: "Top 1% · Commencement 2025 ✨",
+            title: "Alpha Sigma Nu Honor Society",
+            description: "Inducted into Alpha Sigma Nu — the National Jesuit Honor Society — for placing in the top 1% of the class with a 3.95 GPA, recognized for academics, leadership, and service.",
+            image: "assets/images/alpha sigma nu.png",
+            hashtags: ["AlphaSigmaNu", "HonorSociety", "AcademicExcellence", "Top1Percent"],
+            cta: "https://www.linkedin.com/in/connectwithajayrajsingh/details/honors/"
+        }
+    ];
 
-    // Render each card
     dummyPosts.forEach((post, index) => {
         const card = document.createElement("div");
         card.className = "insta-card";
@@ -201,7 +200,7 @@ const posts = [
                     <span class="insta-username">${post.username}</span>
                     <span class="insta-tag">${post.tag}</span>
                 </div>
-                <i class="fas fa-ellipsis-h insta-menu"></i>
+                <i class="fab fa-linkedin insta-menu" style="color:#0077b5;font-size:1.2rem;"></i>
             </div>
             <div class="insta-image">
                 <img src="${post.image}" alt="${post.title}">
@@ -210,21 +209,21 @@ const posts = [
                 <h3 class="insta-title">${post.title}</h3>
                 <p class="insta-description">${post.description}</p>
                 <div class="insta-hashtags">
-                    ${post.hashtags.map(tag => `<span>#${tag}</span>`).join(" ")}
+                    ${post.hashtags.map(tag => `<span class="insta-hash">#${tag}</span>`).join("")}
                 </div>
-                <a href="${post.cta}" class="insta-cta" target="_blank">Learn More →</a>
+                <a href="${post.cta}" class="insta-cta" target="_blank">
+                    <i class="fab fa-linkedin"></i> View on LinkedIn →
+                </a>
             </div>
         `;
 
         track.appendChild(card);
 
-        // Add dots
         const dot = document.createElement("span");
         dot.className = "insta-dot" + (index === 0 ? " active" : "");
         dotsContainer.appendChild(dot);
     });
 
-    // Carousel logic
     let currentIndex = 0;
     const cards = track.querySelectorAll(".insta-card");
     const dots = dotsContainer.querySelectorAll(".insta-dot");
@@ -252,10 +251,11 @@ const posts = [
     updateCarousel();
 }
 
-// Render all modals
+// ================= MODALS =================
+
 function renderModals(projects) {
     const container = document.getElementById('modals-container');
-    
+
     // About Modal
     container.innerHTML += `
         <div id="aboutModal" class="modal">
@@ -265,19 +265,39 @@ function renderModals(projects) {
                     <h2>Contact Information</h2>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Name:</strong> Ajay Raj Singh</p>
-                    <p><strong>Email:</strong> ajayrajsingh2003@gmail.com</p>
-                    <p><strong>Phone:</strong> +1 (732) 209-0281</p>
-                    <p><strong>Location:</strong> Jersey City, New Jersey, United States</p>
-                    <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/connectwithajayrajsingh" target="_blank">connectwithajayrajsingh</a></p>
-                    <p><strong>GitHub:</strong> <a href="https://github.com/ajayrajsingh2003" target="_blank">ajayrajsingh2003</a></p>
-                    <br>
-                    <p>Data Engineer with 6+ years of experience in building scalable data solutions, ETL pipelines, and cloud-based data infrastructure.</p>
+                    <div style="display:flex;flex-direction:column;gap:10px;">
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <i class="fas fa-user" style="width:18px;color:var(--accent,#4f8ef7);"></i>
+                            <span><strong>Ajay Raj Singh</strong></span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <i class="fas fa-envelope" style="width:18px;color:var(--accent,#4f8ef7);"></i>
+                            <a href="mailto:ajayrajsingh2003@gmail.com">ajayrajsingh2003@gmail.com</a>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <i class="fas fa-phone" style="width:18px;color:var(--accent,#4f8ef7);"></i>
+                            <span>+1 (732) 209-0281</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <i class="fas fa-map-marker-alt" style="width:18px;color:var(--accent,#4f8ef7);"></i>
+                            <span>Jersey City, New Jersey, United States</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <i class="fab fa-linkedin" style="width:18px;color:#0077b5;"></i>
+                            <a href="https://linkedin.com/in/connectwithajayrajsingh" target="_blank">connectwithajayrajsingh</a>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <i class="fab fa-github" style="width:18px;color:var(--accent,#4f8ef7);"></i>
+                            <a href="https://github.com/ajayrajsingh2003" target="_blank">ajayrajsingh2003</a>
+                        </div>
+                    </div>
+                    <hr style="margin:18px 0;opacity:0.2;">
+                    <p style="line-height:1.7;">Data Engineer with 6+ years of experience building production-grade pipelines across healthcare, sports analytics, and enterprise domains. Currently processing 200GB+ daily healthcare claims on AWS with 99.5% uptime at Pavane Solutions.</p>
                 </div>
             </div>
         </div>
     `;
-    
+
     // Experience Modal
     container.innerHTML += `
         <div id="experienceModal" class="modal">
@@ -287,24 +307,74 @@ function renderModals(projects) {
                     <h2>Professional Experience</h2>
                 </div>
                 <div class="modal-body">
-                    <h3>Current: Data Engineer at Pavane Solutions Inc.</h3>
-                    <p><em>Jun 2024 – Present | Remote, NJ</em></p>
-                    <ul>
-                        <li>35% improvement in data processing throughput</li>
-                        <li>40% reduction in manual errors</li>
-                        <li>25% reduction in operational costs</li>
-                    </ul>
-                    <h3>Data Science Researcher at Saint Peter's University</h3>
-                    <p><em>Nov 2023 – Feb 2025 | Jersey City, NJ</em></p>
-                    <ul>
-                        <li>Presented 2 research projects at NJBDA 2025</li>
-                        <li>15% accuracy improvement with hybrid algorithms</li>
-                    </ul>
+
+                    <div style="border-left:3px solid var(--accent,#4f8ef7);padding-left:14px;margin-bottom:24px;">
+                        <h3 style="margin:0 0 2px;">Data Engineer</h3>
+                        <div style="font-weight:600;margin-bottom:2px;">Pavane Solutions Inc.</div>
+                        <div style="font-size:0.85rem;opacity:0.7;margin-bottom:10px;">Jul 2024 – Present &nbsp;·&nbsp; Remote, NJ</div>
+                        <ul style="margin:0;padding-left:18px;line-height:1.8;">
+                            <li>Engineered PySpark ETL pipelines on AWS EMR/Glue processing <strong>200GB+ daily</strong> healthcare claims into Redshift and Athena — <strong>99.5% uptime</strong></li>
+                            <li>Orchestrated <strong>50+ Airflow DAGs</strong> with retry logic and SLA monitoring — <strong>40% reduction</strong> in manual intervention</li>
+                            <li>Optimized PySpark jobs via broadcast joins and dynamic partitioning — <strong>35% faster</strong> processing, <strong>$1,800/month</strong> saved on AWS EMR</li>
+                            <li>Migrated Oracle to Snowflake with dbt incremental ELT and star schema modeling — <strong>25% cost reduction</strong></li>
+                            <li>Built data quality framework: CloudWatch alerts for schema drift, null checks, and referential integrity violations</li>
+                            <li>Deployed containerized pipelines via Docker on AWS EKS with Jenkins CI/CD</li>
+                            <li>Implemented IaC using Terraform — automated provisioning across dev, staging, and production</li>
+                            <li>Leveraged Azure Databricks for large-scale PySpark transformations on Delta Lake with schema enforcement</li>
+                            <li>Built reusable ingestion frameworks cutting new data source integration time by <strong>50%</strong></li>
+                            <li>Reduced average query latency by <strong>20%</strong> through schema design and query optimization</li>
+                        </ul>
+                    </div>
+
+                    <div style="border-left:3px solid var(--accent,#4f8ef7);padding-left:14px;margin-bottom:24px;">
+                        <h3 style="margin:0 0 2px;">Data Science Researcher</h3>
+                        <div style="font-weight:600;margin-bottom:2px;">Saint Peter's University</div>
+                        <div style="font-size:0.85rem;opacity:0.7;margin-bottom:10px;">Nov 2023 – Feb 2025 &nbsp;·&nbsp; Jersey City, NJ</div>
+                        <ul style="margin:0;padding-left:18px;line-height:1.8;">
+                            <li>Built least-polluted AQI routing system using Azure Maps + live AQI data — <strong>1st Prize, SPU Data Science Showcase 2024</strong></li>
+                            <li>NLP pipeline ingesting <strong>10,000+ daily articles</strong> from NYT and Bing APIs with PySpark sentiment analysis</li>
+                            <li>Hybrid ACO + Grid Search algorithm — <strong>+15% accuracy</strong>, <strong>-20% training time</strong> on breast cancer diagnostics</li>
+                            <li>Automated Azure-based ingestion pipelines — <strong>60% reduction</strong> in data preparation time</li>
+                            <li>Deployed AWS Lambda + CloudFront platform — <strong>65% reduction</strong> in content delivery latency</li>
+                            <li>Presented <strong>2 research papers</strong> at NJBDA 2025 — NLP pipelines and AQI routing (both under peer review)</li>
+                            <li>Utilized Azure Databricks for distributed geospatial and health data processing</li>
+                            <li>Founded and led SPU Data Science Club — <strong>50+ members</strong></li>
+                        </ul>
+                    </div>
+
+                    <div style="border-left:3px solid var(--accent,#4f8ef7);padding-left:14px;margin-bottom:24px;">
+                        <h3 style="margin:0 0 2px;">Data Scientist II</h3>
+                        <div style="font-weight:600;margin-bottom:2px;">IT Nopal Technologies</div>
+                        <div style="font-size:0.85rem;opacity:0.7;margin-bottom:10px;">Jun 2021 – Jan 2023 &nbsp;·&nbsp; New Delhi, India</div>
+                        <ul style="margin:0;padding-left:18px;line-height:1.8;">
+                            <li>Sports analytics pipelines processing <strong>50K+ match events weekly</strong> via REST APIs, Airflow, and AWS S3</li>
+                            <li><strong>100% data integrity</strong> across ingestion layers via Python-based JSON validation</li>
+                            <li>Improved ML model accuracy by <strong>20%</strong> through ensemble modeling and feature engineering</li>
+                            <li>Reduced AWS costs by <strong>15%</strong> — right-sized EC2, S3 lifecycle policies, Lambda refactoring</li>
+                            <li>Containerized ML workflows with Docker + GitLab CI/CD pipelines</li>
+                            <li>Automated validation workflows cutting manual effort by <strong>40%</strong></li>
+                        </ul>
+                    </div>
+
+                    <div style="border-left:3px solid var(--accent,#4f8ef7);padding-left:14px;">
+                        <h3 style="margin:0 0 2px;">Data Scientist I</h3>
+                        <div style="font-weight:600;margin-bottom:2px;">IT Nopal Technologies</div>
+                        <div style="font-size:0.85rem;opacity:0.7;margin-bottom:10px;">Jan 2019 – May 2021 &nbsp;·&nbsp; New Delhi, India</div>
+                        <ul style="margin:0;padding-left:18px;line-height:1.8;">
+                            <li>Migrated <strong>10M+ records</strong> MongoDB to PostgreSQL — <strong>85% faster queries</strong>, <strong>70% less EC2 cost</strong></li>
+                            <li>Serverless analytics layer with AWS Lambda + API Gateway — <strong>30% performance improvement</strong></li>
+                            <li>PyTorch ML models deployed as Flask APIs — <strong>82% accuracy</strong>, cut A/B test cycles by 3 days</li>
+                            <li>Plotly + SQL dashboards tracking KPIs across <strong>4+ departments</strong></li>
+                            <li>Automated aggregation scripts saving <strong>40%</strong> of manual data handling effort</li>
+                            <li>Maintained <strong>95%+ data reliability</strong> across all production pipelines</li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>
     `;
-    
+
     // Skills Modal
     container.innerHTML += `
         <div id="skillsModal" class="modal">
@@ -314,19 +384,84 @@ function renderModals(projects) {
                     <h2>Technical Skills</h2>
                 </div>
                 <div class="modal-body">
-                    <h3>Programming:</h3>
-                    <p>Python, SQL, PL/SQL, C/C++, YAML</p>
-                    <h3>Big Data & ETL:</h3>
-                    <p>PySpark, Apache Airflow, Apache Kafka, AWS Glue, Azure Data Factory</p>
-                    <h3>Cloud Platforms:</h3>
-                    <p>AWS, Azure, Snowflake</p>
-                    <h3>Databases:</h3>
-                    <p>PostgreSQL, MySQL, SQL Server, MongoDB</p>
+
+                    <div style="margin-bottom:18px;">
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+                            <i class="fas fa-code" style="color:var(--accent,#4f8ef7);"></i> Programming
+                        </div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                            ${["Python","SQL","PL/SQL","C/C++","YAML","Bash","JSON"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:18px;">
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+                            <i class="fas fa-stream" style="color:var(--accent,#4f8ef7);"></i> Data Engineering & ETL
+                        </div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                            ${["PySpark","Apache Spark","Apache Airflow","dbt","ETL/ELT","Data Warehousing","Star Schema Modeling","Data Partitioning","Query Optimization","S3 Event-Driven Pipelines","ELT Development"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:18px;">
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+                            <i class="fas fa-cloud" style="color:var(--accent,#4f8ef7);"></i> Cloud & Infrastructure
+                        </div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                            ${["AWS S3","AWS EMR","AWS Glue","AWS Lambda","AWS Athena","AWS EKS","CloudWatch","CloudFront","API Gateway","Azure Data Factory","Azure Databricks","Azure Maps API","Docker","Kubernetes","Terraform"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:18px;">
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+                            <i class="fas fa-database" style="color:var(--accent,#4f8ef7);"></i> Databases
+                        </div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                            ${["PostgreSQL","MySQL","SQL Server","MongoDB","Snowflake","Redshift","AWS RDS","Delta Lake"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:18px;">
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+                            <i class="fas fa-chart-bar" style="color:var(--accent,#4f8ef7);"></i> Analytics & Visualization
+                        </div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                            ${["Tableau","Power BI","Plotly","Pandas","NumPy","Scikit-learn","PyTorch","Matplotlib","Seaborn","Feature Engineering"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:18px;">
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+                            <i class="fas fa-brain" style="color:var(--accent,#4f8ef7);"></i> NLP & Machine Learning
+                        </div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                            ${["NLP","Sentiment Analysis","Text Processing","Hugging Face Transformers","BERT","Machine Learning","Classification","Metaheuristic Algorithms","Flask APIs"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:18px;">
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+                            <i class="fas fa-tools" style="color:var(--accent,#4f8ef7);"></i> DevOps & CI/CD
+                        </div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                            ${["Docker","Kubernetes","Jenkins","GitLab CI/CD","Git","Terraform","Infrastructure as Code","REST API Integration"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+                            <i class="fas fa-shield-alt" style="color:var(--accent,#4f8ef7);"></i> Data Quality & Monitoring
+                        </div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                            ${["AWS CloudWatch","Schema Drift Detection","Data Validation","Automated Alerting","SLA Monitoring","Referential Integrity Checks","PyODBC"].map(s => `<span style="background:var(--accent-light,#e8f0fe);color:var(--accent,#4f8ef7);border-radius:20px;padding:3px 12px;font-size:0.82rem;font-weight:600;">${s}</span>`).join("")}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     `;
-    
+
     // Education Modal
     container.innerHTML += `
         <div id="educationModal" class="modal">
@@ -336,65 +471,79 @@ function renderModals(projects) {
                     <h2>Education</h2>
                 </div>
                 <div class="modal-body">
-                    <h3>Master of Science in Data Science</h3>
-                    <p><strong>Saint Peter's University</strong></p>
-                    <p>Feb 2023 – Feb 2025 | Jersey City, NJ</p>
-                    <p><strong>GPA:</strong> 3.95/4.00</p>
-                    <br>
-                    <h3>Bachelor of Technology in Computer Science</h3>
-                    <p><strong>AKTU</strong></p>
-                    <p>Aug 2016 – Aug 2020 | India</p>
-                    <p><strong>GPA:</strong> 3.57/4.00</p>
+
+                    <div style="border-left:3px solid var(--accent,#4f8ef7);padding-left:14px;margin-bottom:24px;">
+                        <h3 style="margin:0 0 2px;">Master of Science in Data Science</h3>
+                        <div style="font-weight:600;margin-bottom:2px;">Saint Peter's University</div>
+                        <div style="font-size:0.85rem;opacity:0.7;margin-bottom:10px;">Feb 2023 – Feb 2025 &nbsp;·&nbsp; Jersey City, NJ</div>
+                        <p style="margin:0 0 6px;"><strong>GPA:</strong> 3.95 / 4.00</p>
+                        <p style="margin:0 0 6px;"><strong>Honors:</strong> Alpha Sigma Nu Honor Society &nbsp;·&nbsp; Top 1% of class</p>
+                        <p style="margin:0;"><strong>Activities:</strong> Data Science Club Founder & President &nbsp;·&nbsp; SPU Ambassador &nbsp;·&nbsp; NJBDA 2025 Presenter</p>
+                    </div>
+
+                    <div style="border-left:3px solid var(--accent,#4f8ef7);padding-left:14px;">
+                        <h3 style="margin:0 0 2px;">Bachelor of Technology in Computer Science</h3>
+                        <div style="font-weight:600;margin-bottom:2px;">AKTU</div>
+                        <div style="font-size:0.85rem;opacity:0.7;margin-bottom:10px;">Aug 2016 – Aug 2020 &nbsp;·&nbsp; India</div>
+                        <p style="margin:0;"><strong>GPA:</strong> 3.57 / 4.00</p>
+                    </div>
+
                 </div>
             </div>
         </div>
     `;
-    
+
     // Awards Modal
-    // Awards Modal with Cards
-container.innerHTML += `
-    <div id="awardsModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close-modal" onclick="closeModal('awardsModal')">&times;</button>
-                <h2>Honors & Awards</h2>
-            </div>
-            <div class="modal-body awards-grid">
-                <div class="award-card">
-                    <img src="assets/images/award-ambassador.png" alt="Ambassador Award">
-                    <h4><a href="https://www.saintpeters.edu/" target="_blank">Ambassador of Saint Peter's University</a></h4>
-                    <p>Jul 2025</p>
+    container.innerHTML += `
+        <div id="awardsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close-modal" onclick="closeModal('awardsModal')">&times;</button>
+                    <h2>Honors & Awards</h2>
                 </div>
-                <div class="award-card">
-                    <img src="assets/images/award-dsc.png" alt="Data Science Club">
-                    <h4><a href="https://www.saintpeters.edu/" target="_blank">Data Science Club President</a></h4>
-                    <p>Apr 2025</p>
-                </div>
-                <div class="award-card">
-                    <img src="assets/images/award-showcase.png" alt="Data Science Showcase">
-                    <h4><a href="https://njbda.org/" target="_blank">First Place - Data Science Showcase</a></h4>
-                    <p>Dec 2024</p>
-                </div>
-                <div class="award-card">
-                    <img src="assets/images/award-alpha.png" alt="Alpha Sigma Nu">
-                    <h4><a href="https://www.alphasigmanu.org/" target="_blank">Alpha Sigma Nu Honor Society</a></h4>
-                    <p>Nov 2024</p>
-                </div>
-                <div class="award-card">
-                    <img src="assets/images/award-ds.png" alt="Data Storyteller">
-                    <h4><a href="https://www.tableau.com/" target="_blank">Data Storyteller Award</a></h4>
-                    <p>2024</p>
-                </div>
-                <div class="award-card">
-                    <img src="assets/images/award-njbda.png" alt="NJBDA">
-                    <h4><a href="https://njbda.org/" target="_blank">NJBDA Research Presenter</a></h4>
-                    <p>2025</p>
+                <div class="modal-body awards-grid">
+
+                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7337945622408290307/" target="_blank" class="award-card" style="text-decoration:none;display:block;cursor:pointer;">
+                        <img src="assets/images/ambassador_announcement.png" alt="SPU Ambassador">
+                        <h4>Ambassador of Saint Peter's University</h4>
+                        <p>Jul 2025 &nbsp;·&nbsp; <span style="color:var(--accent,#4f8ef7);">LinkedIn →</span></p>
+                    </a>
+
+                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7318006071007088640/" target="_blank" class="award-card" style="text-decoration:none;display:block;cursor:pointer;">
+                        <img src="assets/images/Data Science Club President.png" alt="Data Science Club">
+                        <h4>Data Science Club Founder & President</h4>
+                        <p>Apr 2025 &nbsp;·&nbsp; <span style="color:var(--accent,#4f8ef7);">LinkedIn →</span></p>
+                    </a>
+
+                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7270277314288967680/" target="_blank" class="award-card" style="text-decoration:none;display:block;cursor:pointer;">
+                        <img src="assets/images/Data Science Showcase Winner.png" alt="Data Science Showcase">
+                        <h4>1st Place — Data Science Showcase</h4>
+                        <p>Dec 2024 &nbsp;·&nbsp; <span style="color:var(--accent,#4f8ef7);">LinkedIn →</span></p>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/connectwithajayrajsingh/details/honors/" target="_blank" class="award-card" style="text-decoration:none;display:block;cursor:pointer;">
+                        <img src="assets/images/alpha sigma nu.png" alt="Alpha Sigma Nu">
+                        <h4>Alpha Sigma Nu Honor Society</h4>
+                        <p>Nov 2024 &nbsp;·&nbsp; <span style="color:var(--accent,#4f8ef7);">LinkedIn →</span></p>
+                    </a>
+
+                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7246560421753536515/" target="_blank" class="award-card" style="text-decoration:none;display:block;cursor:pointer;">
+                        <img src="assets/images/Data StoryTeller Award.png" alt="Data Storyteller">
+                        <h4>Data Storyteller Award</h4>
+                        <p>2024 &nbsp;·&nbsp; <span style="color:var(--accent,#4f8ef7);">LinkedIn →</span></p>
+                    </a>
+
+                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7330083180433002496/" target="_blank" class="award-card" style="text-decoration:none;display:block;cursor:pointer;">
+                        <img src="assets/images/NJBDA conference.png" alt="NJBDA">
+                        <h4>NJBDA 2025 Research Presenter</h4>
+                        <p>2025 &nbsp;·&nbsp; <span style="color:var(--accent,#4f8ef7);">LinkedIn →</span></p>
+                    </a>
+
                 </div>
             </div>
         </div>
-    </div>
-`;
-    
+    `;
+
     // Project Modals
     projects.forEach(project => {
         container.innerHTML += `
@@ -418,19 +567,16 @@ container.innerHTML += `
     });
 }
 
-// Tab switching functionality
+// ================= TABS =================
+
 function showTab(tabName) {
-    // Hide all content sections
     document.getElementById('projects-content').style.display = 'none';
     document.getElementById('experience-content').style.display = 'none';
     document.getElementById('about-content').style.display = 'none';
-    document.getElementById('tags-content').style.display = 'none';  // 🔥 add this line
+    document.getElementById('tags-content').style.display = 'none';
 
-    
-    // Remove active class from all tabs
     document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-    
-    // Show selected content and activate tab
+
     if (tabName === 'projects') {
         document.getElementById('projects-content').style.display = 'block';
         document.querySelectorAll('.tab')[2].classList.add('active');
@@ -446,7 +592,8 @@ function showTab(tabName) {
     }
 }
 
-// Modal open/close functions
+// ================= MODALS OPEN/CLOSE =================
+
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
@@ -463,7 +610,6 @@ function closeModal(modalId) {
     }
 }
 
-// Close modal when clicking outside
 window.onclick = function(event) {
     if (event.target.classList.contains('modal')) {
         event.target.style.display = 'none';
@@ -471,11 +617,11 @@ window.onclick = function(event) {
     }
 }
 
-// Initialize portfolio on page load
+// ================= INIT =================
+
 document.addEventListener('DOMContentLoaded', () => {
     loadPortfolioData();
-    
-    // Setup intersection observer for scroll animations
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -483,11 +629,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 entry.target.style.transform = 'translateY(0)';
             }
         });
-    }, {
-        threshold: 0.1
-    });
-    
-    // Observe elements after a short delay to ensure they're rendered
+    }, { threshold: 0.1 });
+
     setTimeout(() => {
         document.querySelectorAll('.post, .experience-card').forEach(el => {
             el.style.opacity = '0';

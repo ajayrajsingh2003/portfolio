@@ -2,31 +2,31 @@
     {
         "category": "Programming",
         "icon": "code",
-        "skills": ["Python", "SQL", "PL/SQL", "C/C++", "YAML"]
+        "skills": ["Python", "SQL", "PL/SQL", "C/C++", "YAML", "Bash", "JSON"]
     },
     {
         "category": "Databases",
         "icon": "database",
-        "skills": ["PostgreSQL", "MySQL", "SQL Server", "MongoDB", "NoSQL"]
+        "skills": ["PostgreSQL", "MySQL", "SQL Server", "MongoDB", "Snowflake", "Redshift", "AWS RDS", "Delta Lake"]
     },
     {
         "category": "Cloud & Big Data",
         "icon": "cloud",
-        "skills": ["AWS", "Azure", "Snowflake", "PySpark", "Airflow"]
+        "skills": ["AWS", "Azure", "Databricks", "PySpark", "Apache Spark", "Airflow", "Snowflake", "AWS EMR", "AWS Glue", "AWS Athena"]
     },
     {
         "category": "Analytics & Viz",
         "icon": "chart-bar",
-        "skills": ["Tableau", "Power BI", "Plotly", "Scikit-learn", "Pandas"]
+        "skills": ["Tableau", "Power BI", "Plotly", "Scikit-learn", "Pandas", "NumPy", "PyTorch", "Matplotlib", "Seaborn"]
     },
     {
         "category": "Tools & DevOps",
         "icon": "tools",
-        "skills": ["Docker", "Terraform", "GitLab CI/CD", "Git", "Flask"]
+        "skills": ["Docker", "Kubernetes", "Terraform", "GitLab CI/CD", "Jenkins", "Git", "Flask", "AWS EKS", "REST APIs"]
     },
     {
         "category": "ETL & Streaming",
         "icon": "stream",
-        "skills": ["Apache Kafka", "AWS Glue", "Azure Data Factory", "SSIS", "DBT"]
+        "skills": ["AWS Glue", "Azure Data Factory", "dbt", "Apache Kafka", "Apache Airflow", "PySpark ETL", "S3 Event-Driven Pipelines", "ELT Development"]
     }
 ]
